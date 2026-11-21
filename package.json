@@ -8,11 +8,11 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jae1010/session-toast-notification.git"
+    "url": "git+https://github.com/Jae1010/dsh-session-toast-notification.git"
   },
-  "homepage": "https://github.com/Jae1010/session-toast-notification",
+  "homepage": "https://github.com/Jae1010/dsh-session-toast-notification",
   "bugs": {
-    "url": "https://github.com/Jae1010/session-toast-notification/issues"
+    "url": "https://github.com/Jae1010/dsh-session-toast-notification/issues"
   },
   "keywords": [
     "deepseek-harness",

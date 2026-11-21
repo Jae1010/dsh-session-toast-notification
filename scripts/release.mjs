@@ -35,7 +35,7 @@ const current = pkg.version
 const input = process.argv[2]
 
 const GIT_INDEX = join(ROOT, 'market', 'index-git.json')
-const GIT_URL = 'https://github.com/Jae1010/session-toast-notification.git'
+const GIT_URL = 'https://github.com/Jae1010/dsh-session-toast-notification.git'
 
 /** Point the git-source index at HEAD, so `install=<url>#<commit>` lands on this version. */
 const syncGitIndex = () => {

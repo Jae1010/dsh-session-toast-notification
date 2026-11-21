@@ -68,7 +68,7 @@ node scripts/release.mjs patch     # 或 minor / major / 1.2.3
 
 推 tag 之后 `.github/workflows/release.yml` 会校验 tag 与 `package.json` 一致、跑检查、用 npm 的 trusted publishing（OIDC，不需要 token）发布。
 
-**npm 侧要先配好 trusted publisher**：repository `Jae1010/session-toast-notification`、workflow `release.yml`。没配之前 publish 步骤会在 registry 上 404，那是配置未完成，不是构建坏了。
+**npm 侧要先配好 trusted publisher**：repository `Jae1010/dsh-session-toast-notification`、workflow `release.yml`。没配之前 publish 步骤会在 registry 上 404，那是配置未完成，不是构建坏了。
 
 ## 文档
 

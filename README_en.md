@@ -3,7 +3,7 @@
 [简体中文](README.md) · [English](README_en.md)
 
 [![npm version](https://img.shields.io/npm/v/session-toast-notification)](https://www.npmjs.com/package/session-toast-notification)
-[![GitHub stars](https://img.shields.io/github/stars/Jae1010/session-toast-notification?style=social)](https://github.com/Jae1010/session-toast-notification)
+[![GitHub stars](https://img.shields.io/github/stars/Jae1010/dsh-session-toast-notification?style=social)](https://github.com/Jae1010/dsh-session-toast-notification)
 [![license](https://img.shields.io/npm/l/session-toast-notification)](LICENSE)
 
 **Session notifications for [DeepSeek Harness](https://www.deepseek.com/harness/): a desktop toast when a turn ends, when the agent asks you something, or when a tool needs approval — and you can answer, approve or jump back from the notification itself.**
@@ -24,8 +24,8 @@ Or use **Plugins → Add plugin** in DSH, search `session-toast-notification`, i
 From a market index source (Plugins → Discover → index sources), add either URL and search the package name:
 
 ```
-https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index-git.json   # straight from GitHub, no npm package needed
-https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index.json       # from npm (once published)
+https://cdn.jsdelivr.net/gh/Jae1010/dsh-session-toast-notification@main/market/index-git.json   # straight from GitHub, no npm package needed
+https://cdn.jsdelivr.net/gh/Jae1010/dsh-session-toast-notification@main/market/index.json       # from npm (once published)
 ```
 
 ## What a notification looks like

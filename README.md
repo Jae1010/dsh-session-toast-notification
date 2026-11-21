@@ -3,7 +3,7 @@
 [简体中文](README.md) · [English](README_en.md)
 
 [![npm version](https://img.shields.io/npm/v/session-toast-notification)](https://www.npmjs.com/package/session-toast-notification)
-[![GitHub stars](https://img.shields.io/github/stars/Jae1010/session-toast-notification?style=social)](https://github.com/Jae1010/session-toast-notification)
+[![GitHub stars](https://img.shields.io/github/stars/Jae1010/dsh-session-toast-notification?style=social)](https://github.com/Jae1010/dsh-session-toast-notification)
 [![license](https://img.shields.io/npm/l/session-toast-notification)](LICENSE)
 
 **给 [DeepSeek Harness](https://www.deepseek.com/harness/) 用的会话通知插件：跑完一轮、中途提问、等待授权时弹系统通知，并且能直接在通知上答题、审批、跳回会话。**
@@ -41,11 +41,11 @@ dsh plugin --profile web update session-toast-notification@latest
 插件 → 发现（Discover）→ 索引源，加上下面任意一个地址，再搜 `session-toast-notification` 安装：
 
 ```
-https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index-git.json   # 从 GitHub 源码装，不依赖 npm
-https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index.json       # 从 npm 装（包发布后可用）
+https://cdn.jsdelivr.net/gh/Jae1010/dsh-session-toast-notification@main/market/index-git.json   # 从 GitHub 源码装，不依赖 npm
+https://cdn.jsdelivr.net/gh/Jae1010/dsh-session-toast-notification@main/market/index.json       # 从 npm 装（包发布后可用）
 ```
 
-（jsDelivr 打不开时可以换成 `https://raw.githubusercontent.com/Jae1010/session-toast-notification/main/market/index-git.json`。）
+（jsDelivr 打不开时可以换成 `https://raw.githubusercontent.com/Jae1010/dsh-session-toast-notification/main/market/index-git.json`。）
 
 ## 通知长什么样
 
@@ -259,7 +259,7 @@ node scripts/release.mjs patch   # 升版本 + 同步 market/index.json
 
 ## 喜欢它？
 
-如果它让你不用一直盯着终端，欢迎在 [GitHub](https://github.com/Jae1010/session-toast-notification) 点亮 ⭐，也欢迎提 issue / PR。
+如果它让你不用一直盯着终端，欢迎在 [GitHub](https://github.com/Jae1010/dsh-session-toast-notification) 点亮 ⭐，也欢迎提 issue / PR。
 
 ## 许可证
 

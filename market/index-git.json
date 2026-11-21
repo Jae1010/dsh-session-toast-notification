@@ -52,7 +52,7 @@
           "publishTimestamp": 1795280624,
           "source": {
             "type": "git",
-            "url": "https://github.com/Jae1010/session-toast-notification.git",
+            "url": "https://github.com/Jae1010/dsh-session-toast-notification.git",
             "commit": "f1b55b1047c062a142a4a10962e902d3ab6aca1d"
           },
           "engines": {
