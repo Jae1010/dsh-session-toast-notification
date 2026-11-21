@@ -1,0 +1,49 @@
+{
+  "name": "session-toast-notification",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "description": "Desktop notifications when a DeepSeek Harness session finishes a turn or asks for an answer: Windows toasts, macOS notifications through the app window, with switches, bundled sounds and custom sounds on the plugin page. macOS support is beta and may misbehave.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "notification",
+    "toast",
+    "windows",
+    "macos"
+  ],
+  "engines": {
+    "dsh": ">=0.2.2-rc.5"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "toast.ps1",
+    "jump.ps1",
+    "launch.vbs",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "sounds/*.mp3",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ]
+    }
+  }
+}

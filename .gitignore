@@ -1,0 +1,12 @@
+# 开发/测试产物
+_test/
+_assets/
+_source-sounds/
+*.log
+
+# 依赖与编辑器
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

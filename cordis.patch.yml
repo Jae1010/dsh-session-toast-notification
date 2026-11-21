@@ -1,0 +1,52 @@
+- insert:
+    - id: session-toast-notification
+      name: session-toast-notification
+      config:
+        appId: com.deepseek.dsh
+        language: auto
+        includeSubagents: false
+        snippet: true
+        # Turn finished / question waiting / approval waiting. Values: default,
+        # reminder, mail, silent, a bundled id (terminal-bell, edits-undone,
+        # zcode-pop, apple-sms, apple-received, apple-sent, success,
+        # task-completed) or `custom:<name>` for a file added on the plugin page.
+        soundComplete: default
+        soundQuestion: reminder
+        soundApproval: reminder
+        notifyQuestions: true
+        notifyApprovals: true
+        # Also blink this window's taskbar button while the notification shows;
+        # the blink stops as soon as the window comes to the front.
+        flashTaskbar: true
+        # Answer from the notification itself: the question body and its options
+        # go into the notice, and approvals get allow once / allow for this
+        # session / deny buttons. Turning it off keeps notifications
+        # informational and sends every decision back to the app.
+        # "Allow for this session" is a grant this plugin remembers per session,
+        # tool and reason (DSH has no session-scoped approval of its own).
+        replyInToast: true
+        # Click a notification to jump back to that conversation.
+        clickToOpen: true
+        # Stay quiet only for the conversation you are currently looking at;
+        # other conversations still notify.
+        respectFocus: true
+        approvalTimeoutMs: 180000
+        # A goal keeps re-running the same conversation; only the last round is
+        # worth a notification.
+        suppressWhileGoal: true
+        # Per-notification volume (0-100) and quiet hours ("HH:MM-HH:MM", empty
+        # string disables). The plugin page edits these, so they rarely need to
+        # be set here.
+        volumeComplete: 100
+        volumeQuestion: 100
+        volumeApproval: 100
+        quietComplete: ''
+        quietQuestion: ''
+        quietApproval: ''
+        minDurationMs: 0
+        # Notification backend, defaults to the running platform: win32 posts a
+        # WinRT toast (with buttons), darwin hands the notice to the page or to
+        # osascript and is reminder-only - macOS notices never carry buttons.
+        # It stays a config key so tests can exercise the macOS path elsewhere.
+        # platform: darwin
+        debug: false
