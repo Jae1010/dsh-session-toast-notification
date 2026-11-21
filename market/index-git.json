@@ -49,11 +49,11 @@
       "versions": [
         {
           "version": "1.0.0",
-          "publishTimestamp": 1795280624,
+          "publishTimestamp": 1795280802,
           "source": {
             "type": "git",
             "url": "https://github.com/Jae1010/dsh-session-toast-notification.git",
-            "commit": "f1b55b1047c062a142a4a10962e902d3ab6aca1d"
+            "commit": "e74c921cb71614a8246da161d85e5d61c5234c6c"
           },
           "engines": {
             "dsh": ">=0.2.2-rc.5"
