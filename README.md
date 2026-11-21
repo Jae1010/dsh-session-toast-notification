@@ -38,7 +38,14 @@ dsh plugin --profile web update session-toast-notification@latest
 
 ### 从插件市场的索引源装
 
-插件 → 发现（Discover）→ 索引源，加上含本插件的索引地址（仓库里的 `market/index.json`），再搜包名安装。
+插件 → 发现（Discover）→ 索引源，加上下面任意一个地址，再搜 `session-toast-notification` 安装：
+
+```
+https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index-git.json   # 从 GitHub 源码装，不依赖 npm
+https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index.json       # 从 npm 装（包发布后可用）
+```
+
+（jsDelivr 打不开时可以换成 `https://raw.githubusercontent.com/Jae1010/session-toast-notification/main/market/index-git.json`。）
 
 ## 通知长什么样
 

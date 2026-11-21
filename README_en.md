@@ -21,6 +21,13 @@ dsh plugin --profile web update session-toast-notification@latest
 
 Or use **Plugins → Add plugin** in DSH, search `session-toast-notification`, install, then reload the page once (`Ctrl+R`) so the plugin page and Settings → Popups show up.
 
+From a market index source (Plugins → Discover → index sources), add either URL and search the package name:
+
+```
+https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index-git.json   # straight from GitHub, no npm package needed
+https://cdn.jsdelivr.net/gh/Jae1010/session-toast-notification@main/market/index.json       # from npm (once published)
+```
+
 ## What a notification looks like
 
 ```
