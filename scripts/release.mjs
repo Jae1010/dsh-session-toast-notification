@@ -12,7 +12,8 @@
  * push a matching tag — `.github/workflows/release.yml` publishes to npm when
  * the tag and the version agree.
  */
-import { readFileSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -33,8 +34,46 @@ const pkg = JSON.parse(readFileSync(PKG, 'utf8'))
 const current = pkg.version
 const input = process.argv[2]
 
+const GIT_INDEX = join(ROOT, 'market', 'index-git.json')
+const GIT_URL = 'https://github.com/Jae1010/session-toast-notification.git'
+
+/** Point the git-source index at HEAD, so `install=<url>#<commit>` lands on this version. */
+const syncGitIndex = () => {
+  if (!existsSync(GIT_INDEX)) {
+    console.log('market/index-git.json  not in this checkout, nothing to sync')
+    return
+  }
+  const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim()
+  const head = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
+  const index = JSON.parse(readFileSync(GIT_INDEX, 'utf8'))
+  const plugin = index.plugins.find((entry) => entry.name === head.name)
+  if (!plugin) {
+    console.error(`market/index-git.json does not list ${head.name}`)
+    process.exit(1)
+  }
+  const stamp = Math.floor(Date.now() / 1000)
+  plugin.versions = [
+    {
+      version: head.version,
+      publishTimestamp: stamp,
+      source: { type: 'git', url: GIT_URL, commit },
+      engines: { dsh: head.engines?.dsh },
+    },
+  ]
+  writeJson(GIT_INDEX, index)
+  console.log(`market/index-git.json ${head.name}@${head.version} -> ${commit.slice(0, 7)}`)
+}
+
+if (input === '--sync-git') {
+  syncGitIndex()
+  console.log('\ncommit the index, then push the tag: git add -A && git commit -m "market: point the git index at <sha>"')
+  process.exit(0)
+}
+
 if (!input) {
-  console.error(`usage: node scripts/release.mjs <patch|minor|major|x.y.z>\ncurrent version: ${current}`)
+  console.error(
+    `usage: node scripts/release.mjs <patch|minor|major|x.y.z>\n       node scripts/release.mjs --sync-git\ncurrent version: ${current}`,
+  )
   process.exit(1)
 }
 
@@ -90,6 +129,10 @@ next steps
   1. add a "## ${next}" section to CHANGELOG.md (if the note above appeared)
   2. npm run check
   3. git add -A && git commit -m "${next}"
-  4. git tag v${next} && git push --tags
+  4. node scripts/release.mjs --sync-git   (points market/index-git.json at that commit)
+     git add -A && git commit -m "market: point the git index at v${next}"
+  5. git tag v${next} && git push --tags
      -> .github/workflows/release.yml publishes ${pkg.name}@${next} to npm
 `)
+
+

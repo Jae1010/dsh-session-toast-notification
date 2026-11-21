@@ -59,6 +59,8 @@ node scripts/release.mjs patch     # 或 minor / major / 1.2.3
 
 它会改 `package.json`、同步 `market/index.json` 的版本与时间戳，然后打印后续步骤：
 
+`node scripts/release.mjs --sync-git` 把 `market/index-git.json` 指向当前 HEAD（`install=git+<url>#<commit>` 靠这个 commit 定位版本），所以顺序是「升版本 → 提交 → sync-git → 再提交 → 打 tag」。
+
 1. 在 `CHANGELOG.md` 顶部加 `## <version>` 段
 2. `npm run check`
 3. 提交
@@ -73,3 +75,4 @@ node scripts/release.mjs patch     # 或 minor / major / 1.2.3
 - `README.md` 面向装插件的人：怎么装、长什么样、怎么设置。
 - `docs/compatibility.md` 面向排查兼容性的人：靠哪些接口、在哪些版本验证过、怎么自己验。
 - `CHANGELOG.md` 面向升级的人：1.0.0 之前的内部迭代折叠在 `<details>` 里。
+

@@ -121,7 +121,7 @@ check('bundled sounds are present', () => {
   return `${files.length} files`
 })
 
-check('market index matches the package version', () => {
+check('market idx matches the package version', () => {
   if (!exists('market/index.json')) return 'no market/index.json in this repo'
   const index = readJson('market/index.json')
   const plugin = index.plugins.find((entry) => entry.name === pkg.name)
@@ -129,6 +129,20 @@ check('market index matches the package version', () => {
   const version = plugin.versions[0]
   need(version.version === pkg.version, `index says ${version.version}, package says ${pkg.version}`)
   need(version.source.type === 'npm', 'index entry must publish through npm')
+
+  if (exists('market/index-git.json')) {
+    const gitIndex = readJson('market/index-git.json')
+    const gitPlugin = gitIndex.plugins.find((entry) => entry.name === pkg.name)
+    need(gitPlugin, `market/index-git.json does not list ${pkg.name}`)
+    const gitVersion = gitPlugin.versions[0]
+    need(gitVersion.version === pkg.version, `git index says ${gitVersion.version}, package says ${pkg.version}`)
+    need(gitVersion.source.type === 'git', 'git index entry must install from git')
+    need(
+      typeof gitVersion.source.commit === 'string' && /^[0-9a-f]{40}$/.test(gitVersion.source.commit),
+      'git index needs a full 40-char commit',
+    )
+  }
+
   return `${plugin.name}@${version.version}`
 })
 
