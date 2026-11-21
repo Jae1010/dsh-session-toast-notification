@@ -1,24 +1,39 @@
 {
   "name": "session-toast-notification",
   "version": "1.0.0",
+  "description": "Desktop notifications when a DeepSeek Harness session finishes a turn or asks for an answer: Windows toasts, macOS reminders through the app window, with switches, bundled sounds and custom sounds on the plugin page. macOS support is beta and may misbehave.",
+  "icon": "icon.svg",
+  "author": "Jae1010",
   "license": "MIT",
   "type": "module",
-  "description": "Desktop notifications when a DeepSeek Harness session finishes a turn or asks for an answer: Windows toasts, macOS notifications through the app window, with switches, bundled sounds and custom sounds on the plugin page. macOS support is beta and may misbehave.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jae1010/session-toast-notification.git"
+  },
+  "homepage": "https://github.com/Jae1010/session-toast-notification",
+  "bugs": {
+    "url": "https://github.com/Jae1010/session-toast-notification/issues"
+  },
   "keywords": [
+    "deepseek-harness",
     "dsh",
     "dsh-plugin",
-    "deepseek-harness",
+    "cordis",
+    "plugin",
     "notification",
     "toast",
     "windows",
     "macos"
   ],
   "engines": {
+    "node": ">=22",
     "dsh": ">=0.2.2-rc.5"
   },
+  "main": "index.js",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
+    "./package.json": "./package.json",
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.svg"
   },
@@ -32,9 +47,14 @@
     "locale/*.json",
     "icon.svg",
     "sounds/*.mp3",
-    "README.md",
-    "CHANGELOG.md"
+    "README*.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "release": "node scripts/release.mjs"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
@@ -44,6 +64,11 @@
       "inject": [
         "@deepseek-ai/dsh-client-ui-workspace"
       ]
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.2-rc.5+": "compatible"
+      }
     }
   }
 }

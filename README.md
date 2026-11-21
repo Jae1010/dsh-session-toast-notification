@@ -1,16 +1,44 @@
 # 会话事件弹窗提醒
 
+[简体中文](README.md) · [English](README_en.md)
+
+[![npm version](https://img.shields.io/npm/v/session-toast-notification)](https://www.npmjs.com/package/session-toast-notification)
+[![GitHub stars](https://img.shields.io/github/stars/Jae1010/session-toast-notification?style=social)](https://github.com/Jae1010/session-toast-notification)
+[![license](https://img.shields.io/npm/l/session-toast-notification)](LICENSE)
+
+**给 [DeepSeek Harness](https://www.deepseek.com/harness/) 用的会话通知插件：跑完一轮、中途提问、等待授权时弹系统通知，并且能直接在通知上答题、审批、跳回会话。**
+
 会话跑完一轮、或者中途停下来等你回答时，在系统通知中心弹一条通知，告诉你「哪个会话在等你」。Windows 走通知中心，macOS 走页面里的系统通知（**macOS 目前是 beta 版，功能可能不正常**）。
 
 同时开多个会话（多个任务并行）时，通知里带会话标题、工作目录、耗时和内容摘要，一眼就能分辨是哪一条。点一下通知直接跳回那个会话。
 
-## 安装
+## 安装 / 更新
 
-包名 `session-toast-notification`，支持 Windows 与 macOS（macOS 是 beta，见下面「macOS」一节），要求 DSH 0.2.2-rc.5 及以上（`package.json` 的 `engines.dsh` 会在安装时校验）。
+要求 DSH 0.2.2-rc.5 及以上（`package.json` 的 `engines.dsh` 会在安装时校验）；Windows 10/11 功能完整，macOS 为 beta（见下面「macOS」一节）。
 
-- 插件 → 发现（Discover）→ 索引源，添加含本插件的索引，搜 `session-toast-notification` 安装；
-- 或直接装某个版本：`dsh plugin --profile <profile> add session-toast-notification@1.6.11`；
-- 装完刷新一次页面（Ctrl+R），插件页的开关和提示音下拉才会出现。
+### 在 DSH 里装
+
+**插件 → 添加插件（Add plugin）**，搜 `session-toast-notification`，点安装。装完刷新一次页面（Ctrl+R），插件页的开关和提示音下拉才会出现。
+
+### 用 dsh CLI 装
+
+```sh
+dsh plugin --profile web add session-toast-notification
+```
+
+更新：
+
+```sh
+dsh plugin --profile web update session-toast-notification@latest
+```
+
+### 从源码链接（开发用）
+
+把仓库目录链接进 profile（`plugin_manager` 的 `install_bundle`，或 `dsh plugin --profile <profile> add <本地目录>`）。宿主半（`index.js`）改完要重新启用插件，页面半（`client.js`）改完刷新页面即可。
+
+### 从插件市场的索引源装
+
+插件 → 发现（Discover）→ 索引源，加上含本插件的索引地址（仓库里的 `market/index.json`），再搜包名安装。
 
 ## 通知长什么样
 
@@ -204,3 +232,28 @@ macOS 上用的是另一条链路，因为普通进程没法像 Windows 那样�
 - 提示音文件支持 `.wav` 与 `.mp3`；超过 6 秒的部分会被截断
 - 授权通知的按钮与卡片一一对应（普通工具审批就是「允许一次 / 拒绝」两个）。点下去是替你回答页面上那张正在等的授权卡片：请求被页面接管时由页面结算，没有页面连接时由插件自己结算，两种都能生效；过了 `approvalTimeoutMs`（默认 180 秒）或通知被划掉，就回应用里自己点。点按钮不会把 DSH 窗口拉到前台。旧版插件留在通知中心里的「本次会话允许」按钮仍然可点（插件自己记的那条会话授权），新通知不再出现这个按钮
 - 点通知依赖浏览器半（`client.js`，跑在 DSH 页面里的那一半代码，负责轮询“刚才点了哪个会话”并切过去）：装好插件后需要**刷新一次页面或重启 DSH**，已打开的旧页面才会开始轮询；未刷新时点通知只会把窗口拉到前台，不会切换会话
+
+## 兼容性
+
+插件用到的宿主接口、各 DSH 版本的验证状态、平台能力差异，以及「换一个新版本之后怎么自己验一遍」，都写在 [docs/compatibility.md](docs/compatibility.md)。摘要：
+
+- **DSH 0.2.2-rc.5**：完整验证（四个测试脚本全绿，三类通知与「从通知直接答题」都在真机上跑通）
+- 更早的 rc：未验证
+- **Windows 10/11**：完整能力；**macOS 14+**：beta，只做简单提醒（没有按钮、没有任务栏闪烁）；**Linux**：未实现
+
+## 开发
+
+```sh
+npm run check      # 清单、语法、locale、PowerShell 纯 ASCII、内置音效、市场索引版本
+node scripts/release.mjs patch   # 升版本 + 同步 market/index.json
+```
+
+仓库结构、不能改的运行时标识、Toast XML 的元素顺序、为什么通知不能靠 waterfall、怎么发版——都在 [AGENTS.md](AGENTS.md)。行为测试（`_test/` 下的四个 harness）需要本机的 DSH 与 Windows，不进仓库。
+
+## 喜欢它？
+
+如果它让你不用一直盯着终端，欢迎在 [GitHub](https://github.com/Jae1010/session-toast-notification) 点亮 ⭐，也欢迎提 issue / PR。
+
+## 许可证
+
+[MIT](LICENSE)

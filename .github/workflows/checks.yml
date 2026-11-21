@@ -1,0 +1,33 @@
+name: Checks
+
+# Everything that can be decided from the files alone runs here: manifest
+# integrity, syntax, locale completeness, ASCII-only PowerShell, bundled sounds
+# and the market index version. The behavioural harnesses live in `_test/` on a
+# Windows machine, because they drive real DSH and real toasts.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false
+
+      - name: Check the plugin
+        run: npm run check

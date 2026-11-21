@@ -1,0 +1,80 @@
+name: Bug report
+description: 通知没弹、没声音、按钮点不动之类的问题
+title: '[bug] '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        先说一句：**先看两处常见原因**，它们解释了大部分「没弹/没声」的报告。
+
+        1. **静音时段**——设置面板里「静音时段」开着且当前时间落在区间内时，通知照弹但不出声；面板会显示一行橙色提示告诉你现在正静音。
+        2. **系统勿扰 / 专注助手 / 按应用通知被关**——WinRT 通知归在 `DeepSeek Harness` 这个应用身份下，被系统压掉时插件拿不到任何反馈。
+
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DeepSeek Harness 版本
+      placeholder: 例如 0.2.2-rc.5
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: 插件版本
+      placeholder: 例如 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 系统
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS（beta）
+        - 其它
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 哪一类通知出问题
+      multiple: true
+      options:
+        - 会话完成
+        - 中途提问
+        - 等待授权
+        - 任务栏闪烁
+        - 提示音
+        - 点击通知跳回会话
+        - 设置面板
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么
+      description: 期望什么、实际什么。有截图最好（通知卡片、设置面板）。
+    validations:
+      required: true
+
+  - type: textarea
+    id: settings
+    attributes:
+      label: 当时的插件设置
+      description: 把 设置 → 弹窗提醒 里的开关和你改过的东西写下来；或者贴 `%DSH_HOME%\session-toast\settings.json` 的内容。
+      render: json
+
+  - type: checkboxes
+    id: checked
+    attributes:
+      label: 已经排除的
+      options:
+        - label: 我确认当时不在静音时段
+        - label: 我确认系统没有开勿扰 / 专注助手
+        - label: 我确认「设置 → 系统 → 通知」里 DeepSeek Harness 的通知是开着的

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安装 / 配置问题
+    url: https://github.com/Jae1010/session-toast-notification#readme
+    about: 先看 README 的「安装」和「设置」两节，多数问题在那里有答案。
+  - name: macOS 说明
+    url: https://github.com/Jae1010/session-toast-notification/blob/main/docs/compatibility.md
+    about: macOS 支持是 beta，能力差异列在这份文档里。

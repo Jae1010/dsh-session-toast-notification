@@ -1,0 +1,55 @@
+name: Release
+
+# Publishing is tag driven: `git tag v1.0.1 && git push --tags` publishes
+# whatever `package.json` says, after checking that the tag agrees with it.
+#
+# No NODE_AUTH_TOKEN is configured on purpose. npm's trusted publishing (OIDC)
+# mints a short-lived credential from the workflow identity, so configure the
+# trusted publisher on npmjs.com as:
+#
+#   publisher: GitHub Actions
+#   repository: Jae1010/session-toast-notification
+#   workflow:   release.yml
+#   environment: (leave empty)
+#
+# Until that is done the publish step fails with a 404 on the registry — that is
+# the signal to finish the npm-side setup, not evidence of a broken build.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Check the plugin
+        run: npm run check
+
+      - name: Verify the tag matches package.json
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          version="v$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::tag $tag does not match package version $version"
+            exit 1
+          fi
+
+      - name: Verify the package contents
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        run: npm publish --provenance

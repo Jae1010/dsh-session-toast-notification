@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "title": {
+    "en": "Session Toast",
+    "zh": "会话事件弹窗提醒"
+  },
+  "description": {
+    "en": "Desktop notifications for DeepSeek Harness sessions, on Windows and macOS (macOS beta).",
+    "zh": "给 DeepSeek Harness 会话加系统通知（Windows / macOS，macOS 为 beta 版）。"
+  },
+  "metadata": {
+    "categories": {
+      "notifications": {
+        "title": {
+          "en": "Notifications",
+          "zh": "提醒"
+        }
+      }
+    },
+    "labels": {},
+    "sortKeys": {}
+  },
+  "plugins": [
+    {
+      "name": "session-toast-notification",
+      "title": {
+        "en": "Session Toast Notification",
+        "zh": "会话事件弹窗提醒"
+      },
+      "description": {
+        "en": "Desktop notification when a turn finishes, the agent asks a question or a tool call needs approval (Windows toasts; on macOS through the app window, beta and possibly misbehaving). Names the session, outcome, duration and folder; answers can be given right in the notice; per-event sounds, volume, quiet hours, taskbar blink and click-to-open are all switchable on the plugin page.",
+        "zh": "一轮结束、中途提问或等待授权时弹系统通知（Windows / macOS，macOS 为 beta 版）：写清是哪个会话、什么状态、耗时多久、在哪个目录；能直接在通知里回答或授权；三类提示音、音量、静音时段、任务栏闪烁、点通知跳回会话，全部可在插件页面里开关。"
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDM2IDM2IiBmaWxsPSJub25lIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlNlc3Npb24gZmluaXNoZWQgcG9wdXAiPgogIDxwYXRoIGZpbGw9InVybCgjc2Vzc2lvblRvYXN0QmVsbCkiIGQ9Ik0xNi40IDhDMTYuNCA3LjEyIDE3LjEyIDYuNCAxOCA2LjRDMTguODggNi40IDE5LjYgNy4xMiAxOS42IDhWOC40MkMyMy4xOCA5LjAyIDI1LjkgMTIuMDIgMjUuOSAxNS44MlYyMS40MkMyNS45IDIzLjEgMjYuNSAyNC40MiAyNy42MiAyNS40QzI4LjEyIDI1Ljg0IDI3LjgxIDI2LjY0IDI3LjE0IDI2LjY0SDguODZDOC4xOSAyNi42NCA3Ljg4IDI1Ljg0IDguMzggMjUuNEM5LjUgMjQuNDIgMTAuMSAyMy4xIDEwLjEgMjEuNDJWMTUuODJDMTAuMSAxMi4wMiAxMi44MiA5LjAyIDE2LjQgOC40MlY4WiIvPgogIDxwYXRoIGZpbGw9InVybCgjc2Vzc2lvblRvYXN0QmVsbCkiIGQ9Ik0xNS40IDI4LjJIMjAuNkMyMC42IDI5LjYgMTkuNDQgMzAuNyAxOCAzMC43QzE2LjU2IDMwLjcgMTUuNCAyOS42IDE1LjQgMjguMloiLz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ic2Vzc2lvblRvYXN0QmVsbCIgeDE9IjEwLjEiIHkxPSI2LjQiIHgyPSIyNi4zMiIgeTI9IjMwLjciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzY3QzdGRSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzRjc3RDgiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgo8L3N2Zz4K",
+      "metadata": {
+        "category": "notifications",
+        "keywords": [
+          "notification",
+          "toast",
+          "windows",
+          "macos",
+          "approval",
+          "sound",
+          "taskbar"
+        ],
+        "labels": [],
+        "sortKeys": {}
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1795278276,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.2-rc.5"
+          }
+        }
+      ]
+    }
+  ]
+}
