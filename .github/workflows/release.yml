@@ -8,7 +8,7 @@ name: Release
 # trusted publisher on npmjs.com as:
 #
 #   publisher: GitHub Actions
-#   repository: Jae1010/session-toast-notification
+#   repository: Jae1010/dsh-session-toast-notification
 #   workflow:   release.yml
 #   environment: (leave empty)
 #
@@ -51,5 +51,20 @@ jobs:
       - name: Verify the package contents
         run: npm pack --dry-run
 
+      # Re-running a tag (or a first release published by hand before the
+      # trusted publisher existed) must not fail the job, so the publish step
+      # only runs when this exact version is still missing from the registry.
+      - name: Check whether this version is already on npm
+        id: published
+        run: |
+          spec="$(node -p "require('./package.json').name")@$(node -p "require('./package.json').version")"
+          if npm view "$spec" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "$spec is already on npm, skipping the publish step"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish to npm
-        run: npm publish --provenance
+        if: steps.published.outputs.exists == 'false'
+        run: npm publish --provenance --access public

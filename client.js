@@ -13,7 +13,7 @@
  * Nothing here may throw: a broken guest module fails the client boot audit.
  */
 window.__ModuleLoader__.load({
-  id: 'session-toast-notification',
+  id: 'dsh-session-toast-notification',
   factory: function (require) {
     var module = { exports: {} }
     var exports = module.exports
@@ -37,7 +37,7 @@ window.__ModuleLoader__.load({
       return slots
     })()
     /** Package name is also the key of the bundle-configuration slot. */
-    var BUNDLE = 'session-toast-notification'
+    var BUNDLE = 'dsh-session-toast-notification'
 
     var React = null
     try {
@@ -47,7 +47,7 @@ window.__ModuleLoader__.load({
     }
     var h = React ? React.createElement : null
 
-    exports.name = 'session-toast-notification-client'
+    exports.name = 'dsh-session-toast-notification-client'
     exports.inject = ['slots', 'uiWorkspace']
 
     exports.apply = function apply(ctx) {

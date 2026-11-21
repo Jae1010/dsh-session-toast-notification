@@ -22,7 +22,7 @@
   },
   "plugins": [
     {
-      "name": "session-toast-notification",
+      "name": "dsh-session-toast-notification",
       "title": {
         "en": "Session Toast Notification",
         "zh": "会话事件弹窗提醒"

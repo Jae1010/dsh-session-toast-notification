@@ -2,9 +2,9 @@
 
 [简体中文](README.md) · [English](README_en.md)
 
-[![npm version](https://img.shields.io/npm/v/session-toast-notification)](https://www.npmjs.com/package/session-toast-notification)
+[![npm version](https://img.shields.io/npm/v/dsh-session-toast-notification)](https://www.npmjs.com/package/dsh-session-toast-notification)
 [![GitHub stars](https://img.shields.io/github/stars/Jae1010/dsh-session-toast-notification?style=social)](https://github.com/Jae1010/dsh-session-toast-notification)
-[![license](https://img.shields.io/npm/l/session-toast-notification)](LICENSE)
+[![license](https://img.shields.io/npm/l/dsh-session-toast-notification)](LICENSE)
 
 **给 [DeepSeek Harness](https://www.deepseek.com/harness/) 用的会话通知插件：跑完一轮、中途提问、等待授权时弹系统通知，并且能直接在通知上答题、审批、跳回会话。**
 
@@ -18,18 +18,18 @@
 
 ### 在 DSH 里装
 
-**插件 → 添加插件（Add plugin）**，搜 `session-toast-notification`，点安装。装完刷新一次页面（Ctrl+R），插件页的开关和提示音下拉才会出现。
+**插件 → 添加插件（Add plugin）**，搜 `dsh-session-toast-notification`，点安装。装完刷新一次页面（Ctrl+R），插件页的开关和提示音下拉才会出现。
 
 ### 用 dsh CLI 装
 
 ```sh
-dsh plugin --profile web add session-toast-notification
+dsh plugin --profile web add dsh-session-toast-notification
 ```
 
 更新：
 
 ```sh
-dsh plugin --profile web update session-toast-notification@latest
+dsh plugin --profile web update dsh-session-toast-notification@latest
 ```
 
 ### 从源码链接（开发用）
@@ -38,7 +38,7 @@ dsh plugin --profile web update session-toast-notification@latest
 
 ### 从插件市场的索引源装
 
-插件 → 发现（Discover）→ 索引源，加上下面任意一个地址，再搜 `session-toast-notification` 安装：
+插件 → 发现（Discover）→ 索引源，加上下面任意一个地址，再搜 `dsh-session-toast-notification` 安装：
 
 ```
 https://cdn.jsdelivr.net/gh/Jae1010/dsh-session-toast-notification@main/market/index-git.json   # 从 GitHub 源码装，不依赖 npm
@@ -224,7 +224,7 @@ macOS 上用的是另一条链路，因为普通进程没法像 Windows 那样�
 - 会话标题取自 `ctx.sessionTitle`，耗时来自 `running → idle` 的时间差，结束状态与摘要来自 `session/event` 里的 `turn/end` 与 `assistant/message` 缓存
 - 点通知的链路：通知带 `activationType="protocol"` + `launch="dsh-session-toast:?session=<id>"` → 协议注册指向 `wscript.exe //B //Nologo launch.vbs "%1"`（插件激活时用 `reg.exe` 写注册表；`wscript` 是 GUI 进程，从它启动 PowerShell 才不会闪黑窗），`launch.vbs` 隐藏启动 `jump.ps1` → `jump.ps1` 把会话 id 写进 `%TEMP%\dsh-session-toast-pending.txt` 并拉起 `dsh://open` → 页面里的 `client.js` 每 1.5 秒问一次 `GET /dsh-session-toast-v2/pending` → 取到 id 就调 `ctx.uiWorkspace.openSession(id)` → `POST /dsh-session-toast-v2/ack` 回报成败（只在 debug 日志里可见）
 - 路由路径带版本号：升级插件时旧代码代仍会占着自己的路由，直到 DSH 重启，所以新代码用新路径，浏览器半先探新路径再回落旧路径
-- 插件页面的开关走同一条路由：`GET/POST /dsh-session-toast-v2/settings` 读写设置，「试听」走 `POST …/preview`，「选择文件」走 `POST …/pick`（宿主进程里拉起 PowerShell 的原生文件框）；面板注册在 `plugins.bundle.config` 槽位（key 为包名 `session-toast-notification`），用平台自带的 `react` 手写渲染，不依赖其它插件
+- 插件页面的开关走同一条路由：`GET/POST /dsh-session-toast-v2/settings` 读写设置，「试听」走 `POST …/preview`，「选择文件」走 `POST …/pick`（宿主进程里拉起 PowerShell 的原生文件框）；面板注册在 `plugins.bundle.config` 槽位（key 为包名 `dsh-session-toast-notification`），用平台自带的 `react` 手写渲染，不依赖其它插件
 - “你在看哪个会话”来自浏览器半：它注册一个渲染 `null` 的小组件到会话作用域的 `conversation.session.header.utilities` 槽位，拿到当前会话 id 后，在窗口聚焦 / 失焦 / 标签页可见性变化时 `POST /dsh-session-toast-v2/presence` 上报 `{sessionId, focused, visible}`；宿主侧记录最近一次上报（120 秒内有效）
 - 授权通知上的按钮：宿主先把 `approval/request` 挂起（这是 waterfall 事件，返回结果即接管、调 `next()` 才交回应用内），按钮用 `activationType="protocol"` 指向 `dsh-session-toast:?action=allow|deny&call=<id>`，点击后 `jump.ps1` 写 pending 文件（带 action 时不拉起窗口），页面轮询取到就 `POST /dsh-session-toast-v2/decide`；超时或请求被取消则自动 `next()`，按钮不会让 agent 卡死
 - 音量：Windows 的系统通知音无法带音量，所以 `toast.ps1` 把三个系统音映射到 `%WINDIR%\Media\Windows Notify *.wav`，与自带 mp3、自定义文件统一用 MCI 播放，并在 `volume < 100` 时发 `setaudio <alias> volume to <volume*10>`

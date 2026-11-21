@@ -1,6 +1,6 @@
 - insert:
-    - id: session-toast-notification
-      name: session-toast-notification
+    - id: dsh-session-toast-notification
+      name: dsh-session-toast-notification
       config:
         appId: com.deepseek.dsh
         language: auto

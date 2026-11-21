@@ -2,9 +2,9 @@
 
 [简体中文](README.md) · [English](README_en.md)
 
-[![npm version](https://img.shields.io/npm/v/session-toast-notification)](https://www.npmjs.com/package/session-toast-notification)
+[![npm version](https://img.shields.io/npm/v/dsh-session-toast-notification)](https://www.npmjs.com/package/dsh-session-toast-notification)
 [![GitHub stars](https://img.shields.io/github/stars/Jae1010/dsh-session-toast-notification?style=social)](https://github.com/Jae1010/dsh-session-toast-notification)
-[![license](https://img.shields.io/npm/l/session-toast-notification)](LICENSE)
+[![license](https://img.shields.io/npm/l/dsh-session-toast-notification)](LICENSE)
 
 **Session notifications for [DeepSeek Harness](https://www.deepseek.com/harness/): a desktop toast when a turn ends, when the agent asks you something, or when a tool needs approval — and you can answer, approve or jump back from the notification itself.**
 
@@ -15,11 +15,11 @@ With several sessions running in parallel, the notification carries the session 
 Needs DSH 0.2.2-rc.5 or later (`engines.dsh` is checked at install time). Windows 10/11 is fully supported; macOS is beta (see below).
 
 ```sh
-dsh plugin --profile web add session-toast-notification
-dsh plugin --profile web update session-toast-notification@latest
+dsh plugin --profile web add dsh-session-toast-notification
+dsh plugin --profile web update dsh-session-toast-notification@latest
 ```
 
-Or use **Plugins → Add plugin** in DSH, search `session-toast-notification`, install, then reload the page once (`Ctrl+R`) so the plugin page and Settings → Popups show up.
+Or use **Plugins → Add plugin** in DSH, search `dsh-session-toast-notification`, install, then reload the page once (`Ctrl+R`) so the plugin page and Settings → Popups show up.
 
 From a market index source (Plugins → Discover → index sources), add either URL and search the package name:
 

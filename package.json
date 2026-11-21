@@ -1,5 +1,5 @@
 {
-  "name": "session-toast-notification",
+  "name": "dsh-session-toast-notification",
   "version": "1.0.0",
   "description": "Desktop notifications when a DeepSeek Harness session finishes a turn or asks for an answer: Windows toasts, macOS reminders through the app window, with switches, bundled sounds and custom sounds on the plugin page. macOS support is beta and may misbehave.",
   "icon": "icon.svg",
