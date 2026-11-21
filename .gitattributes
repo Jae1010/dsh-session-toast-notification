@@ -1,0 +1,13 @@
+# 统一行尾：仓库里用 LF，两个 Windows 脚本保持 CRLF（老工具更认这个）
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.vbs text eol=crlf
+
+# 二进制
+*.mp3 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.wav binary
